@@ -19,5 +19,5 @@ COPY . .
 
 EXPOSE 8000
 
-# 启动：等待 DB 后 uvicorn
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+# 启动：等待 DB 后 uvicorn（Render 等平台用 $PORT 环境变量注入端口）
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
