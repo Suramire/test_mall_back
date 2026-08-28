@@ -1,0 +1,50 @@
+[project]
+name = "mall-backend"
+version = "0.1.0"
+description = "多租户商城SaaS系统后端 (FastAPI)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "sqlalchemy>=2.0",
+    "alembic>=1.14",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    # 数据库驱动：本地 Python3.14 用 pymysql(纯Python) 保证兼容；
+    # 目标生产环境按定稿用 asyncmy(异步) + PyMySQL(Celery同步)
+    "pymysql>=1.1",
+    "cryptography>=43.0",
+    # 缓存/队列
+    "redis>=5.0",
+    # 认证
+    "PyJWT>=2.9",
+    "passlib[bcrypt]>=1.7",
+    "bcrypt>=4.2,<5",
+    # 任务
+    "celery>=5.4",
+    # 日志
+    "structlog>=24.4",
+    # 工具
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
