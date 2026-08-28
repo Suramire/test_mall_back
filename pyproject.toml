@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [tool.poetry]
 package-mode = false
 
@@ -27,6 +31,8 @@ dependencies = [
     "celery>=5.4",
     # 日志
     "structlog>=24.4",
+    # 微信 code2session 调用
+    "httpx>=0.27",
     # 工具
     "python-multipart>=0.0.9",
 ]
@@ -39,6 +45,12 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.11",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+exclude = ["tests*", "migrations*", "scripts*"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
