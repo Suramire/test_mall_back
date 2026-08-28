@@ -44,3 +44,9 @@ app.include_router(api_router, prefix="/api")
 @app.get("/", include_in_schema=False)
 async def root():
     return {"service": settings.APP_NAME, "status": "ok"}
+
+
+@app.get("/health", include_in_schema=False)
+async def health():
+    """无前缀健康检查（负载均衡/探活用）。完整检查见 /api/common/health。"""
+    return {"status": "healthy"}
